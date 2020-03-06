@@ -70,7 +70,7 @@ public class Order implements Serializable {
 	public void setMoment(Instant moment) {
 		this.moment = moment;
 	}	
-
+		
 	public OrderStatus getOrderStatus() {
 		return OrderStatus.valueof(orderStatus);
 	}
@@ -92,14 +92,22 @@ public class Order implements Serializable {
 	
 	public Set<OrderItem> getItens() {
 		return itens;
-	}
+	}	
 	
 	public Payment getPayment() {
 		return payment;
-	}
-
+	}	
+	
 	public void setPayment(Payment payment) {
 		this.payment = payment;
+	}
+	
+	public Double getTotal() {
+		Double sum = 0.0;
+		for(OrderItem x : itens) {
+			sum += x.getSubTotal();
+		}
+		return sum;
 	}
 
 	@Override
